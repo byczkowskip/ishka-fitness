@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% for session in sessions %}
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{ session.title }}
+                    </h5>
+                    {% if session.description %}
+                        <p class="card-text">
+                            {{ session|linebreaks }}
+                        </p>
+                    {% endif %}
+                    <form action="{% url 'schedule:booking_form' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="session_id" value="{{ session.id }}" />
+                        <button type="submit" class="btn btn-sm btn-primary">
+                            Book Now
+                        </button>
+                    </form>
+                </div>
+                <div class="card-footer text-body-secondary">
+                    <span class="badge text-bg-warning">
+                        Session date: {{ session.date|date:'d/m/Y' }},
+                        Start at: {{ session.start_time|date:'H:i' }}
+                    </span>
+                    <span class="badge text-bg-info">
+                        Time duration: {{ session.duration }}
+                    </span>
+                    <span class="badge text-bg-success">
+                        Available slots: {{ session.available_slots }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
