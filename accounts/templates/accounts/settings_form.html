@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block title %}
+    Account Settings
+{% endblock %}
+{% block content %}
+    <div class="col-6 offset-3">
+        <form method="post">
+            <h2>Account settings</h2>
+            <hr/>
+            {% csrf_token %}
+            <div class="form-floating mb-3">
+                <input type="text" name="{{ user_form.first_name.name }}"
+                       class="form-control{% if user_form.first_name.errors %} is-invalid{% endif %}"
+                       id="floatingInput"
+                       value="{{ user_form.first_name.value }}"/>
+                <label for="floatingInput">
+                    {{ user_form.first_name.label }}
+                </label>
+                {% for error in user_form.first_name.errors %}
+                    <div class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" name="{{ user_form.last_name.name }}"
+                       class="form-control{% if user_form.last_name.errors %} is-invalid{% endif %}"
+                       id="floatingInput"
+                       value="{{ user_form.last_name.value }}"/>
+                <label for="floatingInput">
+                    {{ user_form.last_name.label }}
+                </label>
+                {% for error in user_form.last_name.errors %}
+                    <div class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" name="{{ user_form.email.name }}"
+                       class="form-control{% if user_form.email.errors %} is-invalid{% endif %}"
+                       id="floatingInput"
+                       value="{{ user_form.email.value }}"/>
+                <label for="floatingInput">
+                    {{ user_form.email.label }}
+                </label>
+                {% for error in user_form.email.errors %}
+                    <div class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <h2>Update password</h2>
+            <hr/>
+            <div class="form-floating mb-3">
+                <input type="password" name="{{ password_form.old_password.name }}"
+                       class="form-control{% if password_form.old_password.errors %} is-invalid{% endif %}"
+                       id="floatingPassword"/>
+                <label for="floatingPassword">
+                    {{ password_form.old_password.label }}
+                </label>
+                {% for error in password_form.old_password.errors %}
+                    <div class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" name="{{ password_form.new_password1.name }}"
+                       class="form-control{% if password_form.new_password1.errors %} is-invalid{% endif %}"
+                       id="floatingPassword"/>
+                <label for="floatingPassword">
+                    {{ password_form.new_password1.label }}
+                </label>
+                {% for error in password_form.new_password1.errors %}
+                    <div class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="form-floating">
+                <input type="password" name="{{ password_form.new_password2.name }}"
+                       class="form-control{% if password_form.new_password2.errors %} is-invalid{% endif %}"
+                       id="floatingPassword"/>
+                <label for="floatingPassword">
+                    {{ password_form.new_password2.label }}
+                </label>
+                {% for error in password_form.new_password2.errors %}
+                    <div class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row">
+                <div class="col-6 mt-3">
+                    <input type="submit" class="btn btn-primary" value="Save"/>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
